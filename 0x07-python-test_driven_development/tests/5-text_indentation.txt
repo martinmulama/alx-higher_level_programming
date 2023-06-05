@@ -1,0 +1,29 @@
+>>> import doctest
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+>>> text_indentation("Hello. How are you? I am fine.")
+Hello
+How are you
+
+I am fine.
+
+>>> text_indentation("This is a test. \n\n Another sentence?")
+This is a test
+
+Another sentence
+
+>>> text_indentation("No punctuation")
+No punctuation
+
+>>> text_indentation("")
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+
+>>> text_indentation("Some text. With   extra spaces. ")
+Some text
+With   extra spaces
+
+

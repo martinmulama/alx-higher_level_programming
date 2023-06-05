@@ -1,0 +1,27 @@
+>>> import doctest
+>>> add_integer = __import__('0-add_integer').add_integer
+
+>>> add_integer(5, 3)
+8
+
+>>> add_integer(5.7, 3.2)
+8
+
+>>> add_integer(-1, 1)
+0
+
+>>> add_integer(-1, 0)
+-1
+
+>>> add_integer(5.7)
+103
+
+>>> add_integer(5, "3")
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
+>>> add_integer("3", 5)
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
