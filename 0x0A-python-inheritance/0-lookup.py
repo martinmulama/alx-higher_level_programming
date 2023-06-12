@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-#0-lookup.py
+# 0-lookup.py
+# Martin <martin.mulama@yahoo.com>
 """Defines an object attribute lookup function."""
 
 
