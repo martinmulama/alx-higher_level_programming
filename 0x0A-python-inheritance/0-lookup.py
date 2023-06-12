@@ -11,15 +11,4 @@ def lookup(obj):
         A list of strings representing the available attributes and methods of the object.
 
     """
-    attributes = []
-    methods = []
-
-    for attr in dir(obj):
-        if not attr.startswith('__'):
-            value = getattr(obj, attr)
-            if callable(value):
-                methods.append(attr)
-            else:
-                attributes.append(attr)
-
-    return attributes + methods
+    return dir(obj)
