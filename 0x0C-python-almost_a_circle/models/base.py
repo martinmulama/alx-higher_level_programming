@@ -37,7 +37,7 @@ class Base:
 
     @staticmethod
     def from_json_string(json_string):
-        """ that returns the list of the JSON string representation json_string """
+        """ Returns the list of the JSON string representation json_string """
         if json_string is None or json_string == "":
             return []
         return json.loads(json_string)
@@ -55,19 +55,3 @@ class Base:
         if dummy is not None:
             dummy.update(**dictionary)
         return dummy
-
-    @classmethod
-    def load_from_file(cls):
-        """ Returns a list of instances from a JSON file """
-        filename = cls.__name__ + ".json"
-        try:
-            with open(filename, 'r') as file:
-                json_data = file.read()
-            if json_data:
-                dictionaries_list = cls.from_json_string(json_data)
-                for dictionary in dictionaries_list:
-                    instances = cls.create(**dictionary)
-            else:
-                return []
-        except FileNotFoundError:
-            return []
