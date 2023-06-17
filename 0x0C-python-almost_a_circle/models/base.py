@@ -38,9 +38,13 @@ class Base:
     @staticmethod
     def from_json_string(json_string):
         """ Returns the list of the JSON string representation json_string """
-        if json_string is None or json_string == "":
+        if json_string:
+            try:
+                return json.loads(json_string)
+            except json.JSONDecodeError:
+                return []
+        else:
             return []
-        return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
@@ -55,3 +59,18 @@ class Base:
         if dummy is not None:
             dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """ Returns a list of instances from a JSON file """
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, 'r') as file:
+                json_data = file.read()
+                if json_data:
+                    instances = cls.from_json_string(json_data)
+                    return [cls.create(**instance) for instance in instances]
+                else:
+                    return []
+        except FileNotFoundError:
+            return []
