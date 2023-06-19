@@ -1,107 +1,73 @@
 #!/usr/bin/python3
+
+"""
+Unittest for Base class
+"""
+
 import unittest
 from models.base import Base
-from models.square import Square
-import json
-
-'''
-    Creating test cases for the base module
-'''
 
 
-class test_base(unittest.TestCase):
-    '''
-        Testing base
-    '''
-    def test_id_none(self):
-        '''
-            Sending no id
-        '''
-        b = Base()
-        self.assertEqual(1, b.id)
+class TestBase(unittest.TestCase):
+    """Base tests"""
 
-    def test_id(self):
-        '''
-            Sending a valid id
-        '''
-        b = Base(50)
-        self.assertEqual(50, b.id)
+    def setUp(self):
+        Base._Base__nb_objects = 0
 
-    def test_id_zero(self):
-        '''
-            Sending an id 0
-        '''
-        b = Base(0)
-        self.assertEqual(0, b.id)
+    def test_00(self):
+        """Test number 0 for base"""
+        base0 = Base()
+        base1 = Base()
+        self.assertEqual(base0.id, 1)
+        self.assertEqual(base1.id, 2)
 
-    def test_id_negative(self):
-        '''
-            Sending a negative id
-        '''
-        b = Base(-20)
-        self.assertEqual(-20, b.id)
+    def test_01(self):
+        """Test number 1 for base"""
+        base0 = Base(0)
+        self.assertEqual(base0.id, 0)
 
-    def test_id_string(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base("Betty")
-        self.assertEqual("Betty", b.id)
+    def test_02(self):
+        """Test number 2 for base"""
+        base0 = Base(12)
+        self.assertEqual(base0.id, 12)
 
-    def test_id_list(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base([1, 2, 3])
-        self.assertEqual([1, 2, 3], b.id)
+    def test_03(self):
+        """Test number 3 for base"""
+        base0 = Base("test")
+        self.assertEqual(base0.id, "test")
 
-    def test_id_dict(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base({"id": 109})
-        self.assertEqual({"id": 109}, b.id)
+    def test_04(self):
+        """Test number 4 for base"""
+        base0 = Base(-12)
+        self.assertEqual(base0.id, -12)
 
-    def test_id_tuple(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base((8,))
-        self.assertEqual((8,), b.id)
+    def test_05(self):
+        """Test number 5 for base."""
+        base0 = Base(None)
+        self.assertEqual(base0.id, 1)
 
-    def test_to_json_type(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(type(json_string), str)
+    def test_06(self):
+        """Test number 6 for base"""
+        base0 = Base({"test": "test"})
+        self.assertEqual(base0.id, {"test": "test"})
 
-    def test_to_json_value(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(json.loads(json_string),
-                         [{"id": 609, "y": 0, "size": 1, "x": 0}])
+    def test_07(self):
+        """Test number 7 for base"""
+        base0 = Base([1, 2, 3])
+        self.assertEqual(base0.id, [1, 2, 3])
 
-    def test_to_json_None(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string(None)
-        self.assertEqual(json_string, "[]")
+    def test_08(self):
+        """Test number 8 for base"""
+        base0 = Base(12.3)
+        self.assertEqual(base0.id, 12.3)
 
-    def test_to_json_Empty(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([])
-        self.assertEqual(json_string, "[]")
+    def test_09(self):
+        """Test number 9 for base"""
+        base0 = Base()
+        self.assertEqual(str(type(base0)), "<class 'models.base.Base'>")
+        self.assertEqual(base0.__dict__, {"id": 1})
+
+    def test_10(self):
+        """Test number 10 for base"""
+        ret = Base.to_json_string(None)
+        self.assertEqual(ret, "[]")
